@@ -1,0 +1,26 @@
+﻿<Properties StartupConfiguration="{0D52C1E3-1DFD-47FA-99C9-8A1C92C78A15}|Default">
+  <MonoDevelop.Ide.ItemProperties.Automate PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Drink.cs">
+    <Files>
+      <File FileName="Program.cs" Line="1" Column="1" />
+      <File FileName="Drink.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Automate" expanded="True">
+            <Node name="Automate" expanded="True">
+              <Node name="App.config" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
