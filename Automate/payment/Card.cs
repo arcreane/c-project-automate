@@ -3,14 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+namespace Automate.Payment
+{
+    public class Card : PaymentMethod
+    {
 
-public class Card : Payment {
+        public Card()
+        {
+        }
 
-    public Card() {
+        public override void pay()
+        {
+            // TODO implement here
+            throw new NotImplementedException();
+        }
     }
-
-    public void overridePay() {
-        // TODO implement here
-    }
-
 }

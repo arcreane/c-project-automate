@@ -1,2 +1,10 @@
 
 .DS_Store
+
+Automate/obj/
+
+*.user
+
+Automate/.vs/
+
+Automate/bin/

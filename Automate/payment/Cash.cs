@@ -3,14 +3,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+namespace Automate.Payment
+{
+    public class Cash : PaymentMethod
+    {
 
-public class Cash : Payment {
+        public Cash()
+        {
+        }
+        public override void pay()
+        {
+            // TODO implement here
+            throw new NotImplementedException();
+        }
+        
 
-    public Cash() {
     }
-
-    public void witchCash() {
-        // TODO implement here
-    }
-
 }

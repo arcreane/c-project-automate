@@ -43,9 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Automate.cs" />
     <Compile Include="Drink.cs" />
+    <Compile Include="payment\Card.cs" />
+    <Compile Include="payment\Cash.cs" />
+    <Compile Include="payment\PaymentMethod.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Soup.cs" />
+    <Compile Include="Supplement.cs" />
+    <Compile Include="Sweet.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
