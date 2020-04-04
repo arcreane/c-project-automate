@@ -3,12 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-namespace Automate
+namespace Automate.Drinks
 {
-    public class Salty : Drink
+    public class Soup : Drink
     {
 
-        public Salty()
+        public Soup()
         {
         }
 
