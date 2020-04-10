@@ -21,7 +21,7 @@ namespace Automate.Drinks
             Console.WriteLine("verser dans le goblet");
             if (HasCondiment)
             {
-                Console.WriteLine("Ajouter la quantitée {0} de sel",Quantity);
+                Console.WriteLine("Ajouter la quantitée {0} de sel", Quantity);
             }
 
             if (HasSupplement)
@@ -30,6 +30,12 @@ namespace Automate.Drinks
             }
 
             Console.WriteLine("Ajouter une paille recyclable");
+        }
+
+        //choix de suppliment et condiment
+        public override void PersonalizeDrink()
+        {
+
         }
     }
 }

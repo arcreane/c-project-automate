@@ -17,7 +17,7 @@ namespace Automate.Drinks
         public decimal Price
         {
             get;
-            private set;
+            protected set;
         }
         /// <summary>
         /// constructeur de la classe drink
@@ -37,7 +37,8 @@ namespace Automate.Drinks
         public bool HasSupplement { get; set; }
 
         public abstract void PreparationDrink();
-        
+
+        public abstract void PersonalizeDrink();
 
     }
 }

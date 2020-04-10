@@ -40,5 +40,11 @@ namespace Automate.Drinks
             }
         }
 
+        //choix de suppliment et condiment
+        public override void PersonalizeDrink()
+        {
+            
+        }
+
     }
 }
