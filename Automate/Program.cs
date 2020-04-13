@@ -22,28 +22,72 @@ namespace Automate
         /// 10 : ajout de l'option
         /// 11 : servir la boisson
         /// </summary>
-        static void Main(string[] args)
+        static int SelectDrink(int drink)
         {
             Console.WriteLine("Bonjour ! ?");
             Console.WriteLine("Merci de sélectionner une boisson !");
             Console.WriteLine("Taper 1 pour un café, taper 2 pour un thé et taper 3 pour une soupe");
             string userChoice = Console.ReadLine();
+
             switch (userChoice)
             {
                 case "1":
-                    Console.WriteLine("Voilà votre café !");
+                    Console.WriteLine("Vous avez choisi un café !");
+                    drink = 1;
                     break;
                 case "2":
-                    Console.WriteLine("Voilà votre thé !");
+                    Console.WriteLine("Vous avez choisi un thé ! !");
+                    drink = 2;
                     break;
                 case "3":
-                    Console.WriteLine("Voilà votre soupe !");
+                    drink = 3;
+                    Console.WriteLine("Vous avez choisi une soupe !");
                     break;
                 default:
                     Console.WriteLine("Je n'ai pas compris votre demande, réessayez");
                     break;
             }
-
+            return (drink);
+        }
+        static bool AddCondiment(int drink, bool stick)
+        {
+            if (drink == 1 || drink == 2)
+            {
+                Console.WriteLine("Merci de saisir la quantité de sucre souhaitée (entre 0 et 5)");
+                string userChoice = Console.ReadLine();
+                switch (userChoice)
+                {
+                    case "0":
+                        Console.WriteLine("Votre boisson ne sera pas sucrée !");
+                        stick = false;
+                        break;
+                    default:
+                        Console.WriteLine("Nous avons enregistreé votre demande, merci");
+                        stick = true;
+                        break;
+                }
+            }
+            else if (drink == 3)
+            {
+                Console.WriteLine("Merci de saisir la quantité de sel souhaitée (entre 0 et 5)");
+                string userChoice = Console.ReadLine();
+                switch (userChoice)
+                {
+                    case "0":
+                        Console.WriteLine("Votre boisson ne sera pas salée !");
+                        stick = false;
+                        break;
+                    default:
+                        Console.WriteLine("Nous avons enregistreé votre demande, merci");
+                        stick = true;
+                        break;
+                }
+            }
+            else
+            {
+                SelectDrink(drink);
+            }
+            return (stick);
         }
 
     }
