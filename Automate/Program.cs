@@ -22,6 +22,20 @@ namespace Automate
         /// 10 : ajout de l'option
         /// 11 : servir la boisson
         /// </summary>
+        /// 
+        static void Main(string[] args)
+        {
+            // Variable qui permet de connaître la boisson choisi tout au long du programme
+            int drink = 0;
+            // Variable qui permet de savoir si on doit mettre une touillette avant de servir la boisson
+            bool stick = false;
+            
+
+            drink = SelectDrink(drink);
+            AddCondiment(drink, stick);
+
+        }
+        // Fonction qui permet à l'utilisateur de faire son choix de boisson 
         static int SelectDrink(int drink)
         {
             Console.WriteLine("Bonjour ! ?");
@@ -49,6 +63,8 @@ namespace Automate
             }
             return (drink);
         }
+
+        // Fonction qui permet de savoir si l'utilisateur veut sucrer ou saler sa boisson, si quantité > 0, on ajoutera une touillette avant de servir la boisson 
         static bool AddCondiment(int drink, bool stick)
         {
             if (drink == 1 || drink == 2)
@@ -89,6 +105,5 @@ namespace Automate
             }
             return (stick);
         }
-
     }
 }
