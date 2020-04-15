@@ -22,7 +22,8 @@ namespace Automate
         /// 10 : ajout de l'option
         /// 11 : servir la boisson
         /// </summary>
-        /// 
+        ///
+
         static void Main(string[] args)
         {
             // Variable qui permet de connaître la boisson choisi tout au long du programme
@@ -30,11 +31,15 @@ namespace Automate
             // Variable qui permet de savoir si on doit mettre une touillette avant de servir la boisson
             bool stick = false;
             
-
+            // Appel fonction de sélection de la boisson
             drink = SelectDrink(drink);
+            // Propostion de sucrer ou saler
             AddCondiment(drink, stick);
+            // Proposer de payer ou d'ajouter un supplément
+            PriceWithoutOption(drink);
 
         }
+
         // Fonction qui permet à l'utilisateur de faire son choix de boisson 
         static int SelectDrink(int drink)
         {
@@ -104,6 +109,68 @@ namespace Automate
                 SelectDrink(drink);
             }
             return (stick);
+        }
+
+        // Fonction qui affiche le prix de la boisson... l'utilisateur peut donc décider de payer maintenant ou d'ajouter un supplément
+        static void PriceWithoutOption(int drink)
+        {
+            if (drink == 1)
+            {
+                Console.WriteLine("Le montant de votre café est de 1,50euros.");
+                Console.WriteLine("Taper 1 pour payer ou taper 2 si vous souhaitez ajouter du lait");
+                string userChoice = Console.ReadLine();
+                switch (userChoice)
+                {
+                    case "1":
+                        Console.WriteLine("Nous allons procéder au paiement!");
+                        //PayDrink();
+                        break;
+                    case "2":
+                        Console.WriteLine("Nous allons procéder à l'ajout du suppleément !");
+                        //AddOption();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if (drink == 2)
+            {
+                Console.WriteLine("Le montant de votre thé est de 1,20euros.");
+                Console.WriteLine("Taper 1 pour payer ou taper 2 si vous souhaitez un thé fruit rouge");
+                string userChoice = Console.ReadLine();
+                switch (userChoice)
+                {
+                    case "1":
+                        Console.WriteLine("Nous allons procéder au paiement!");
+                        //PayDrink();
+                        break;
+                    case "2":
+                        Console.WriteLine("Nous allons procéder à l'ajout du supplément !");
+                        //AddOption();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if (drink == 3)
+            {
+                Console.WriteLine("Le montant de votre soupe est de 2,50euros.");
+                Console.WriteLine("Taper 1 pour payer ou taper 2 si vous souhaitez ajouter du fromage");
+                string userChoice = Console.ReadLine();
+                switch (userChoice)
+                {
+                    case "1":
+                        Console.WriteLine("Nous allons procéder au paiement!");
+                        //PayDrink();
+                        break;
+                    case "2":
+                        Console.WriteLine("Nous allons procéder à l'ajout du suppleément !");
+                        //AddOption();
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 }
