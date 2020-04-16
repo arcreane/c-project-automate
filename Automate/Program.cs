@@ -127,7 +127,7 @@ namespace Automate
                         break;
                     case "2":
                         Console.WriteLine("Nous allons procéder à l'ajout du suppleément !");
-                        //AddOption();
+                        AddOption(drink);
                         break;
                     default:
                         break;
@@ -146,7 +146,7 @@ namespace Automate
                         break;
                     case "2":
                         Console.WriteLine("Nous allons procéder à l'ajout du supplément !");
-                        //AddOption();
+                        AddOption(drink);
                         break;
                     default:
                         break;
@@ -170,6 +170,66 @@ namespace Automate
                     default:
                         break;
                 }
+            }
+        }
+
+        static void AddOption(int drink)
+        {
+            if (drink == 1)
+            {
+                Console.WriteLine("Nous allons ajouter du lait augmentant le prix de 0,50c.");
+                PriceWithOption(drink);
+            }
+            if (drink == 2)
+            {
+                Console.WriteLine("Nous allons ajouter du fromage augmentant le prix de 0,50c.");
+                PriceWithOption(drink);
+            }
+            if (drink == 3)
+            {
+                Console.WriteLine("Nous allons vous mettre du thé rouge augmentant le prix de 0,50c.");
+                PriceWithOption(drink);
+            }
+        }
+
+        static void PriceWithOption (int drink)
+        {
+            if (drink == 1)
+            {
+                Console.WriteLine("Le prix de votre café s'eélève maintenant à 2euros.");
+                GiveOrPay();
+                return;
+            }
+            if (drink == 2)
+            {
+                Console.WriteLine("Le prix de votre thé s'eélève maintenant à 1,70euros.");
+                GiveOrPay();
+                return;
+            }
+            if (drink == 3)
+            {
+                Console.WriteLine("Le prix de votre thé s'eélève maintenant à 3euros.");
+                GiveOrPay();
+                return;
+            }
+        }
+
+        static void GiveOrPay()
+        {
+            Console.WriteLine("Taper 1 pour payer ou taper 2 annuler");
+            string userChoice = Console.ReadLine();
+            switch (userChoice)
+            {
+                case "1":
+                    Console.WriteLine("Nous allons procéder au paiement!");
+                    //PayDrink();
+                    break;
+                case "2":
+                    Console.WriteLine("Vous ne souhaitez plus de boissons ? Dommage !");
+                    //SelectDrink();
+                    break;
+                default:
+                    break;
             }
         }
     }
