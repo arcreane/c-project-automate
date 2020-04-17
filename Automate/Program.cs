@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Automate.Drinks;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,26 +11,41 @@ namespace Automate
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Bonjour ! Ça farte ?");
-            Console.WriteLine("Tu veux quoi pour l'apero ?");
-            Console.WriteLine("Tape 1 pour un café, tape 2 pour un thé et tape 3 pour une soupe");
-            string userChoice = Console.ReadLine();
-            switch (userChoice)
+            Drink drink = null;
+            do
             {
-                case "1": 
-                    break;
-                case "2":
-                    break;
-                case "3":
-                    break;
-                default:
-                    Console.WriteLine("Je n'ai pas compris votre demande, réessayez");
-                    break;
-            }
+                Console.WriteLine("Bonjour");
+                Console.WriteLine("Choisir ton boisson");
+                Console.WriteLine("Tape 1 pour un café, tape 2 pour un thé et tape 3 pour une soupe");
+                string userChoice = Console.ReadLine();
+                switch (userChoice)
+                {
+                    case "1":
+                        drink = new Coffee();
+                        break;
+                    case "2":
+                        drink = new Tea();
+                        break;
+                    case "3":
+                        drink = new Tomato();
+                        break;
+                    default:
+                        Console.WriteLine("Je n'ai pas compris votre demande, réessayez");
+                        break;
+                }
+            } while (drink == null);
+
+            drink.PersonalizeDrink();
+
+            // Payment
+            Console.WriteLine("Il faut payer {0}", drink.Price);
+
+            // si paeiment ok 
+            drink.PreparationDrink();
+
+            Console.ReadKey();
         }
     }
 }
 
 
- //  _
- //`(_)D

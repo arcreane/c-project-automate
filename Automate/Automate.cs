@@ -25,6 +25,7 @@ namespace Automate
         public void selectDrink()
         {
             // TODO implement here
+
         }
 
         public void pickUpDrink()
