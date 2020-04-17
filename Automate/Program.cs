@@ -197,24 +197,24 @@ namespace Automate
             if (drink == 1)
             {
                 Console.WriteLine("Le prix de votre café s'eélève maintenant à 2euros.");
-                GiveOrPay();
+                QuitOrPay();
                 return;
             }
             if (drink == 2)
             {
                 Console.WriteLine("Le prix de votre thé s'eélève maintenant à 1,70euros.");
-                GiveOrPay();
+                QuitOrPay();
                 return;
             }
             if (drink == 3)
             {
                 Console.WriteLine("Le prix de votre thé s'eélève maintenant à 3euros.");
-                GiveOrPay();
+                QuitOrPay();
                 return;
             }
         }
 
-        static void GiveOrPay()
+        static void QuitOrPay()
         {
             Console.WriteLine("Taper 1 pour payer ou taper 2 annuler");
             string userChoice = Console.ReadLine();
@@ -222,11 +222,29 @@ namespace Automate
             {
                 case "1":
                     Console.WriteLine("Nous allons procéder au paiement!");
-                    //PayDrink();
+                    PayDrink();
                     break;
                 case "2":
                     Console.WriteLine("Vous ne souhaitez plus de boissons ? Dommage !");
                     //SelectDrink();
+                    break;
+                default:
+                    break;
+            }
+        }
+        static void PayDrink()
+        {
+            Console.WriteLine("Souhaitez-vous payer en espèce (taper 1) ou en carte (taper 2)? ");
+            string userChoice = Console.ReadLine();
+            switch (userChoice)
+            {
+                case "1":
+                    Console.WriteLine("Vous avez choisi de payer en espèce!");
+                    //PayCash();
+                    break;
+                case "2":
+                    Console.WriteLine("Vous avez choisi de payer en carte!");
+                    //PayCard();
                     break;
                 default:
                     break;
