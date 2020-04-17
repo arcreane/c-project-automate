@@ -19,6 +19,14 @@ namespace Automate.Drinks
             get;
             protected set;
         }
+
+        static public decimal PresonalizationPrice
+        {
+            get;
+            set;
+        }
+
+        public bool NeedStick { get; set; }
         /// <summary>
         /// constructeur de la classe drink
         /// </summary>
@@ -36,9 +44,12 @@ namespace Automate.Drinks
 
         public bool HasSupplement { get; set; }
 
+        public abstract void PersonalizeDrink();
         public abstract void PreparationDrink();
 
-        public abstract void PersonalizeDrink();
-
+        internal void DisplayPriceWithoutOption()
+        {
+            Console.WriteLine("Le prix de votre boisson est: {0}€", Price);
+        }
     }
 }
