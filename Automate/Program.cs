@@ -27,27 +27,35 @@ namespace Automate
         /// </summary>
         ///
 
+        static Drink drink = null;
+
         static void Main(string[] args)
         {
-            Drink drink = null;
-            string typePayment;
+           
+            string typePayment = "";
 
-            SelectDrink(drink);
+            SelectDrink();
 
-            QuitOrContinue(drink);
+            QuitOrContinue();
 
             drink.PersonalizeDrink();
 
-            // Payment
+            // Paiment
             Console.WriteLine("Il faut payer {0}", drink.Price);
 
             SelectPayement(typePayment);
-            
-            Console.WriteLine("Votre boisson est prête ! Bonne dégustation et à bientôt")
-            
+
+            // Si paiement ok
+            drink.PreparationDrink();
+
+            Console.WriteLine("Votre boisson est prête ! Bonne dégustation et à bientôt");
+
+            Console.WriteLine("Veuillez appuyer sur une touchr pour quitter");
+            Console.ReadKey();
+
         }
         // Fonction qui permet à l'utilisateur de faire son choix de boisson 
-        static void SelectDrink(Drink drink)
+        static void SelectDrink()
         {
             do
             {
@@ -75,7 +83,7 @@ namespace Automate
 
         }
 
-         private static void QuitOrContinue(Drink drink)
+        private static void QuitOrContinue()
         {
             Console.WriteLine("Si vous voulez changer de boisson taper 1, " +
                 "si vous voulez quitter taper 2 sinon appuyer sur n'importe quelle touche pour continuer");
@@ -84,7 +92,7 @@ namespace Automate
             switch (userChoice)
             {
                 case "1":
-                    SelectDrink(drink);
+                    SelectDrink();
                     break;
                 case "2":
                     System.Environment.Exit(0);
@@ -100,21 +108,21 @@ namespace Automate
             Console.WriteLine("Taper 1 pour espèce ou 2 pour carte bleu. ");
             typePayment = Console.ReadLine();
 
-            if (typePayment.Equals("1"))
+            do
             {
-                string payment;
-                Console.WriteLine("S'il vous plaît insérer de l'argent");
-                payment = Console.ReadLine();
+                if (typePayment.Equals("1"))
+                {
+                    string payment;
+                    Console.WriteLine("S'il vous plaît insérer de l'argent");
+                    payment = Console.ReadLine();
 
-                Cash cash = new Cash();
+                    Cash cash = new Cash();
 
-                cash.value = Convert.ToDecimal(payment);
-                cash.Pay(drink.Price);
-                Console.ReadKey();
-            }
-            else
-            {
-                if (typePayment.Equals("2"))
+                    cash.value = Convert.ToDecimal(payment);
+                    cash.Pay(drink.Price);
+                    Console.ReadKey();
+                }
+                else if (typePayment.Equals("2"))
                 {
                     Console.WriteLine("S'il vous plaît insérer la carte");
                     Console.ReadKey();
@@ -130,12 +138,8 @@ namespace Automate
                     Console.WriteLine("Taper 1 pour espèce ou 2 pour carte bleu. ");
                     typePayment = Console.ReadLine();
                 }
-
-                // si payment ok 
-                drink.PreparationDrink();
-
-                Console.ReadKey();
-            }
+            } while (typePayment != "1" && typePayment != "2");
+          
         }
     }
 }
