@@ -44,6 +44,10 @@ namespace Automate.Payment
 
                 return true;
             }
+            else
+            {
+                Console.WriteLine("Paiement annulé");
+            }
 
             return false;
         }

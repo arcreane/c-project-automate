@@ -60,7 +60,7 @@ namespace Automate.Drinks
                 int quantityCondiment;
                 do
                 {
-                    Console.WriteLine("Quantit� 1 --> 5 ?");
+                    Console.WriteLine("Quantité 1 --> 5 ?");
                     quantity = Console.ReadLine();
                 } while (!int.TryParse(quantity, out quantityCondiment) && quantityCondiment < 1 && quantityCondiment > 5);
 

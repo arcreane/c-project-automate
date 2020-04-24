@@ -38,7 +38,7 @@ namespace Automate.Drinks
             Console.WriteLine("Le prix de votre boisson est: {0}€", Price);
             Console.WriteLine("Voulez vous du fromage pour {0} en plus O/N", PresonalizationPrice);
             string withsupp = Console.ReadLine();
-            if (withsupp == "O")
+            if (string.Equals(withsupp, "O", StringComparison.OrdinalIgnoreCase))
             {
                 Console.WriteLine("Ajouter Le fromage");
                 Price += PresonalizationPrice;

@@ -17,7 +17,7 @@ namespace Automate.Payment
                 switch (resp)
                 {
                     case "1":
-                        Console.WriteLine("Veuillez ins�rer une ou plusieurs pi�ce de 5, 10, 20, 50 centimes, 1 ou 2 euro (s�par� par espace)");
+                        Console.WriteLine("Veuillez insérer une ou plusieurs piéce de 5, 10, 20, 50 centimes, 1 ou 2 euro (séparé par espace)");
                         string cash = Console.ReadLine();
                         string[] pieces = cash.Split(' ');
 
@@ -42,7 +42,7 @@ namespace Automate.Payment
                         break;
 
                     case "2":
-                        Console.WriteLine("Veuillez ins�rer un billet de 5, 10, 20 euros");
+                        Console.WriteLine("Veuillez insérer un billet de 5, 10, 20 euros");
                         string cashBillet= Console.ReadLine();
                         switch (cashBillet)
                         {
