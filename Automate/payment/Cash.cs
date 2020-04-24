@@ -12,7 +12,7 @@ namespace Automate.Payment
             int total = 0;
             do
             {
-                Console.WriteLine("Si vous voulez payer taper 1 pour pi�ces ou 2 pour billet 3 pour annuler?");
+                Console.WriteLine("Si vous voulez payer taper 1 pour pièces ou 2 pour billet 3 pour annuler?");
                 string resp = Console.ReadLine();
                 switch (resp)
                 {
@@ -21,7 +21,7 @@ namespace Automate.Payment
                         string cash = Console.ReadLine();
                         string[] pieces = cash.Split(' ');
 
-                        if (pieces.Count() > 0)
+                        if (pieces.Length > 0)
                         {
                             foreach (var item in pieces)
                             {
@@ -63,7 +63,7 @@ namespace Automate.Payment
                     case "3":
                         if (total > 0)
                         {
-                            Console.WriteLine("Veuillez r�cup�rer votre monnaie {0} euro", total / 100);
+                            Console.WriteLine("Veuillez récupérer votre monnaie {0} euro", total / 100);
                             return true;
                         }
                         return false;
@@ -75,7 +75,7 @@ namespace Automate.Payment
 
                 if (total < price * 100)
                 {
-                    Console.WriteLine("il vous manque {0}�", (price * 100 - total) / 100);
+                    Console.WriteLine("il vous manque {0} euro", (price * 100 - total) / 100);
                 }
 
                 if (total == price * 100)
@@ -85,19 +85,12 @@ namespace Automate.Payment
 
                 if (total > price * 100)
                 {
-                    Console.WriteLine("Veuillez r�cup�rer votre monnaie {0} euro", (total - price * 100) / 100);
+                    Console.WriteLine("Veuillez récupérer votre monnaie {0} euro dans le receptacle", (total - price * 100) / 100);
                     return true;
                 }
 
 
             } while (true);
         }
-
-        public override void Refund()
-        {
-            Console.WriteLine(value + " � en pi�ce retombent dans le receptacle");
-        }
-
-
     }
 }

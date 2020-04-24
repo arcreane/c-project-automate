@@ -24,15 +24,8 @@ namespace Automate
         /// 10 : ajout de l'option
         /// 11 : servir la boisson
         /// </summary> 
-        /// 
-        /*
-         // Payment
-            Console.WriteLine("Il faut payer {0}", drink.Price);
-
-            // si paeiment ok 
-            drink.PreparationDrink();
-
-            Console.ReadKey();*/
+        
+       
         static void Main(string[] args)
         {
             Drink drink = SelectDrink();
@@ -43,10 +36,16 @@ namespace Automate
 
             if (QuitOrPay(drink))
             {
+                Console.WriteLine("Votre boisson sera preparée!");
+                Console.WriteLine("Merci!");
+
                 // si paeiment ok  
                 drink.PreparationDrink();
             }
 
+            Console.WriteLine("Votre boisson est prête ! Bonne dégustation et à bientôt");
+
+            Console.WriteLine("Veuillez appuyer sur une touche pour quitter");
             Console.ReadKey();
         }
 
