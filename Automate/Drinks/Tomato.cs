@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Automate.Drinks
 {
-    public class Tomato : Sweet
+    public class Tomato : Drink
     {
-        public Tomato() : base("Soupe de tomate", 2.50m)
+        public Tomato() : base("Soupe de tomate", 2.50m, 050m)
         {
 
         }
@@ -36,31 +36,17 @@ namespace Automate.Drinks
         public override void PersonalizeDrink()
         {
             Console.WriteLine("Le prix de votre boisson est: {0}€", Price);
-            Console.WriteLine("Voulez vous du fromage pour 0.50€ en plus O/N");
+            Console.WriteLine("Voulez vous du fromage pour {0} en plus O/N", PresonalizationPrice);
             string withsupp = Console.ReadLine();
-            if (withsupp == "O" || withsupp == "o")
+            if (withsupp == "O")
             {
-                Console.WriteLine("Ajouter du fromage");
-                Price += 0.50m;
+                Console.WriteLine("Ajouter Le fromage");
+                Price += PresonalizationPrice;
                 HasSupplement = true;
             }
 
-            Console.WriteLine("Voulez vous du sel O/N");
-            string withSalt = Console.ReadLine();
+            CondimentChoice("sel");
 
-            if (withSalt == "O" || withSalt == "o")
-            {
-                string quantity;
-                int quantitySalt;
-                do
-                {
-                    Console.WriteLine("Quantité 1 --> 5 ?");
-                    quantity = Console.ReadLine();
-                } while (!int.TryParse(quantity, out quantitySalt) && quantitySalt < 1 && quantitySalt > 5);
-
-                Quantity = quantitySalt;
-                HasCondiment = true;
-            }
         }
     }
 }

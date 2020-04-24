@@ -7,52 +7,95 @@ namespace Automate.Payment
         public Cash()
         {
         }
-        public override void Pay(decimal PriceDrink)
+        public override bool Pay(decimal price)
         {
-            string payment;
-            Console.WriteLine("S'il vous plaît insérer de l'argent");
-            payment = Console.ReadLine();
-
-            value = Convert.ToDecimal(payment);
-            givenValue = givenValue + value;
-
-
-            if (givenValue < PriceDrink)
+            int total = 0;
+            do
             {
-                decimal manque = PriceDrink - givenValue;
-                Console.WriteLine("Valeur insérer " + givenValue + " euros");
-                Console.WriteLine("S'il vous plaît insérer le montant manquant : " + manque);
-                
-               
-                payment = Console.ReadLine();
-                value = Convert.ToDecimal(payment);
+                Console.WriteLine("Si vous voulez payer taper 1 pour piï¿½ces ou 2 pour billet 3 pour annuler?");
+                string resp = Console.ReadLine();
+                switch (resp)
+                {
+                    case "1":
+                        Console.WriteLine("Veuillez insï¿½rer une ou plusieurs piï¿½ce de 5, 10, 20, 50 centimes, 1 ou 2 euro (sï¿½parï¿½ par espace)");
+                        string cash = Console.ReadLine();
+                        string[] pieces = cash.Split(' ');
 
-                //value = Convert.ToDecimal(Console.ReadLine());
-                Pay(PriceDrink);
+                        if (pieces.Count() > 0)
+                        {
+                            foreach (var item in pieces)
+                            {
+                                if (int.TryParse(item, out int piece))
+                                {
+                                    if (piece == 1 || piece == 2)
+                                    {
+                                        total += piece * 100;
+                                    }
+                                    else if (piece == 5 || piece == 10 || piece == 20 || piece == 50)
+                                    {
+                                        total += piece;
+                                    }
+                                }
+                            }
+                        }
+                        
+                        break;
 
-            }
+                    case "2":
+                        Console.WriteLine("Veuillez insï¿½rer un billet de 5, 10, 20 euros");
+                        string cashBillet= Console.ReadLine();
+                        switch (cashBillet)
+                        {
+                            case "5":
+                                total += 500;
+                                break;
+                            case "10":
+                                total += 1000;
+                                break;
+                            case "20":
+                                total += 2000;
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
 
-            else if (givenValue > PriceDrink)
-            {
-                decimal resultado = givenValue - PriceDrink;
-                Console.WriteLine("Prenez votre monnaie " + resultado + " euros");
-                Console.WriteLine("Votre boisson sera preparée!");
-                Console.WriteLine("Merci!");
-            }
+                    case "3":
+                        if (total > 0)
+                        {
+                            Console.WriteLine("Veuillez rï¿½cupï¿½rer votre monnaie {0} euro", total / 100);
+                            return true;
+                        }
+                        return false;
 
-            else
-            {
-                Console.WriteLine("Votre boisson sera preparée!");
-                Console.WriteLine("Merci!");
-            }
+                    default:
+                        Console.WriteLine("Choix invalide");
+                        break;
+                }
+
+                if (total < price * 100)
+                {
+                    Console.WriteLine("il vous manque {0}ï¿½", (price * 100 - total) / 100);
+                }
+
+                if (total == price * 100)
+                {
+                    return true;
+                }
+
+                if (total > price * 100)
+                {
+                    Console.WriteLine("Veuillez rï¿½cupï¿½rer votre monnaie {0} euro", (total - price * 100) / 100);
+                    return true;
+                }
 
 
-            //throw new NotImplementedException();
+            } while (true);
         }
 
         public override void Refund()
         {
-            Console.WriteLine(value + " € en pièce retombent dans le receptacle");
+            Console.WriteLine(value + " ï¿½ en piï¿½ce retombent dans le receptacle");
         }
 
 

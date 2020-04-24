@@ -12,37 +12,25 @@ namespace Automate.Payment
         {
         }
 
-        public override void Pay(decimal PriceDrink)
+        public override bool Pay(decimal price)
         {
-            Console.WriteLine("S'il vous plaît insérer la carte, appuyez sur une touche quand c'est bon");
-            Console.ReadKey();
-
-            bool myPassword = true;
-
-            do
+            Console.WriteLine("Insï¿½rer votre carte SVP O / N");
+            string resp = Console.ReadLine();
+            if (string.Equals(resp, "O", StringComparison.OrdinalIgnoreCase))
             {
+                Console.WriteLine("Insï¿½rer le code de votre carte");
                 
-                Console.WriteLine("Tapez 1234 pour le mot de passe");
-                string motDePasse = Console.ReadLine();
-                if (motDePasse == "1234")
-                {
-                    Console.WriteLine("Mot de passe accepté");
-                    Console.WriteLine("Votre boisson sera preparée, Merci!");
-                    myPassword = false;
-                }
-                else
-                {
-                    Console.WriteLine("Mot de passe invalide, veillez réessayer");
-                    
-                }
+                Console.WriteLine("Paiement acceptï¿½");
 
-            } while (myPassword == true);
-            
+                return true;
+            }
+
+            return false;
         }
 
         public override void Refund()
         {
-            Console.WriteLine(value + " € a été recrédité sur votre compte en banque");
+            Console.WriteLine(value + " ï¿½ a ï¿½tï¿½ recrï¿½ditï¿½ sur votre compte en banque");
         }
     }
 }

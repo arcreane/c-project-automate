@@ -10,7 +10,7 @@ namespace Automate.Drinks
     {
         public Coffee() : base("Café", 1.50m)
         {
-
+            
         }
 
         public override void PreparationDrink()
@@ -41,32 +41,17 @@ namespace Automate.Drinks
         /// </summary>
         public override void PersonalizeDrink()
         {
-            Console.WriteLine("Le prix de votre boisson est: {0}", Price);
-            Console.WriteLine("Voulez vous du lait pour 0.50 centimes de plus? O/N");
+            Console.WriteLine("Le prix de votre boisson est: {0}€", Price);
+            Console.WriteLine("Voulez vous du lait pour {0} en plus O/N", PresonalizationPrice);
             string withsupp = Console.ReadLine();
-            if (withsupp == "O" || withsupp == "o")
+            if (string.Equals(withsupp, "O", StringComparison.OrdinalIgnoreCase))
             {
-                Console.WriteLine("Ajouter du lait");
-                Price += 0.50m;
+                Console.WriteLine("Ajouter Le lait");
+                Price += PresonalizationPrice;
                 HasSupplement = true;
             }
 
-            Console.WriteLine("Voulez vous du sucre O/N");
-            string withSugar = Console.ReadLine();
-
-            if (withSugar == "O" || withSugar == "o")
-            {
-                string quantity;
-                int quantitySugar;
-                do
-                {
-                    Console.WriteLine("Quantité 1 --> 5 ?");
-                    quantity = Console.ReadLine();
-                } while (!int.TryParse(quantity, out quantitySugar) && quantitySugar < 1 && quantitySugar > 5);
-
-                Quantity = quantitySugar;
-                HasCondiment = true;
-            }
+            SugarChoice();
         }
     }
 }

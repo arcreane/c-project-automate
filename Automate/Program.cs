@@ -1,5 +1,4 @@
-﻿
-using Automate.Drinks;
+﻿using Automate.Drinks;
 using Automate.Payment;
 using System;
 using System.Collections.Generic;
@@ -24,46 +23,63 @@ namespace Automate
         /// 9 : ajout de la quantité de condiment
         /// 10 : ajout de l'option
         /// 11 : servir la boisson
-        /// </summary>
-        ///
+        /// </summary> 
+        /// 
+        /*
+         // Payment
+            Console.WriteLine("Il faut payer {0}", drink.Price);
 
-        static Drink drink = null;
-        static PaymentMethod pm = null;
+            // si paeiment ok 
+            drink.PreparationDrink();
+
+            Console.ReadKey();*/
         static void Main(string[] args)
         {
-           
-            string typePayment = "";
+            Drink drink = SelectDrink();
 
-            SelectDrink();
-
-            QuitOrContinue();
+            QuitOrContinue(drink);
 
             drink.PersonalizeDrink();
 
-            // Paiment
-            Console.WriteLine("Il faut payer {0}", drink.Price);
+            if (QuitOrPay(drink))
+            {
+                // si paeiment ok  
+                drink.PreparationDrink();
+            }
 
-            SelectPayement(typePayment);
-
-            // Si paiement ok
-            drink.PreparationDrink();
-            ///Ca se passe mal il faut rembourser
-            pm.Refund();
-            Console.WriteLine("Votre boisson est prête ! Bonne dégustation et à bientôt");
-            Console.WriteLine("Veuillez appuyer sur une touchr pour quitter");
             Console.ReadKey();
+        }
+
+        private static void QuitOrContinue(Drink drink)
+        {
+            Console.WriteLine("Si vous voulez changer de boisson taper 1, " +
+                "si vous voulez quitter taper 2 sinon appuyer sur n'importe quelle touche pour continuer");
+            string userChoice = Console.ReadLine();
+
+            switch (userChoice)
+            {
+                case "1":
+                    drink = SelectDrink();
+                    break;
+                case "2":
+                    System.Environment.Exit(0);
+                    break;
+                default:
+                    Console.WriteLine("On continue avec votre boisson");
+                    break;
+            }
 
         }
-        // Fonction qui permet à l'utilisateur de faire son choix de boisson 
-        static void SelectDrink()
+
+        static Drink SelectDrink()
         {
+            Drink drink = null;
             do
             {
                 Console.WriteLine("Bonjour");
                 Console.WriteLine("Choisir ton boisson");
                 Console.WriteLine("Tape 1 pour un café, tape 2 pour un thé et tape 3 pour une soupe");
                 string userChoice = Console.ReadLine();
-
                 switch (userChoice)
                 {
                     case "1":
@@ -81,53 +97,49 @@ namespace Automate
                 }
             } while (drink == null);
 
+            return drink;
         }
 
-        private static void QuitOrContinue()
+        static bool QuitOrPay(Drink drink)
         {
-            Console.WriteLine("Si vous voulez changer de boisson taper 1, " +
-                "si vous voulez quitter taper 2 sinon appuyer sur n'importe quelle touche pour continuer");
+            Console.WriteLine("Taper 1 pour payer ou taper 2 annuler");
             string userChoice = Console.ReadLine();
-
             switch (userChoice)
             {
                 case "1":
-                    SelectDrink();
-                    break;
+                    Console.WriteLine("Nous allons procéder au paiement!");
+                    return PayDrink(drink);
                 case "2":
-                    System.Environment.Exit(0);
+                    Console.WriteLine("Vous ne souhaitez plus de boissons ? Dommage !");
+                    //SelectDrink();
                     break;
                 default:
-                    Console.WriteLine("On continue avec votre boisson");
                     break;
             }
 
+            return false;
         }
-        static void SelectPayement(string typePayment)
+
+        static bool PayDrink(Drink drink)
         {
-            Console.WriteLine("Taper 1 pour espèce ou 2 pour carte bleu. ");
-            typePayment = Console.ReadLine();
-           
-            do
+            PaymentMethod paymentMethod = null;
+            Console.WriteLine("Souhaitez-vous payer en espèce (taper 1) ou en carte (taper 2)? ");
+            string userChoice = Console.ReadLine();
+            switch (userChoice)
             {
-                if (typePayment.Equals("1"))
-                {
-                    pm = new Cash();
-                }
-                else if (typePayment.Equals("2"))
-                {
-                    pm = new Card();
-                }
-                else
-                {
-                    Console.WriteLine("S'il vous plaît choisissez une option valide !");
-                    Console.WriteLine("Taper 1 pour espèce ou 2 pour carte bleu. ");
-                    typePayment = Console.ReadLine();
-                }
-            } while (typePayment != "1" && typePayment != "2");
-            
-            pm.Pay(drink.Price);
-            Console.ReadKey();
+                case "1":
+                    Console.WriteLine("Vous avez choisi de payer en espèce!");
+                    paymentMethod = new Cash();
+                    break;
+                case "2":
+                    Console.WriteLine("Vous avez choisi de payer en carte!");
+                    paymentMethod = new Card();
+                    break;
+                default:
+                    break;
+            }
+
+            return paymentMethod.Pay(drink.Price);
         }
     }
 }
