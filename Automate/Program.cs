@@ -1,4 +1,7 @@
-﻿using System;
+﻿
+using Automate.Drinks;
+using Automate.Payment;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,229 +29,115 @@ namespace Automate
 
         static void Main(string[] args)
         {
-            // Variable qui permet de connaître la boisson choisi tout au long du programme
-            int drink = 0;
-            // Variable qui permet de savoir si on doit mettre une touillette avant de servir la boisson
-            bool stick = false;
+            Drink drink = null;
+            string typePayment;
+
+            SelectDrink(drink);
+
+            QuitOrContinue(drink);
+
+            drink.PersonalizeDrink();
+
+            // Payment
+            Console.WriteLine("Il faut payer {0}", drink.Price);
+
+            SelectPayement(typePayment);
             
-            // Appel fonction de sélection de la boisson
-            drink = SelectDrink(drink);
-            // Propostion de sucrer ou saler
-            AddCondiment(drink, stick);
-            // Proposer de payer ou d'ajouter un supplément
-            PriceWithoutOption(drink);
+            Console.WriteLine("Votre boisson est prête ! Bonne dégustation et à bientôt")
+            
+        }
+        // Fonction qui permet à l'utilisateur de faire son choix de boisson 
+        static void SelectDrink(Drink drink)
+        {
+            do
+            {
+                Console.WriteLine("Bonjour");
+                Console.WriteLine("Choisir ton boisson");
+                Console.WriteLine("Tape 1 pour un café, tape 2 pour un thé et tape 3 pour une soupe");
+                string userChoice = Console.ReadLine();
+
+                switch (userChoice)
+                {
+                    case "1":
+                        drink = new Coffee();
+                        break;
+                    case "2":
+                        drink = new Tea();
+                        break;
+                    case "3":
+                        drink = new Tomato();
+                        break;
+                    default:
+                        Console.WriteLine("Je n'ai pas compris votre demande, réessayez");
+                        break;
+                }
+            } while (drink == null);
 
         }
 
-        // Fonction qui permet à l'utilisateur de faire son choix de boisson 
-        static int SelectDrink(int drink)
+         private static void QuitOrContinue(Drink drink)
         {
-            Console.WriteLine("Bonjour ! ?");
-            Console.WriteLine("Merci de sélectionner une boisson !");
-            Console.WriteLine("Taper 1 pour un café, taper 2 pour un thé et taper 3 pour une soupe");
+            Console.WriteLine("Si vous voulez changer de boisson taper 1, " +
+                "si vous voulez quitter taper 2 sinon appuyer sur n'importe quelle touche pour continuer");
             string userChoice = Console.ReadLine();
 
             switch (userChoice)
             {
                 case "1":
-                    Console.WriteLine("Vous avez choisi un café !");
-                    drink = 1;
+                    SelectDrink(drink);
                     break;
                 case "2":
-                    Console.WriteLine("Vous avez choisi un thé ! !");
-                    drink = 2;
-                    break;
-                case "3":
-                    drink = 3;
-                    Console.WriteLine("Vous avez choisi une soupe !");
+                    System.Environment.Exit(0);
                     break;
                 default:
-                    Console.WriteLine("Je n'ai pas compris votre demande, réessayez");
+                    Console.WriteLine("On continue avec votre boisson");
                     break;
             }
-            return (drink);
-        }
 
-        // Fonction qui permet de savoir si l'utilisateur veut sucrer ou saler sa boisson, si quantité > 0, on ajoutera une touillette avant de servir la boisson 
-        static bool AddCondiment(int drink, bool stick)
+        }
+        static void SelectPayement(string typePayment)
         {
-            if (drink == 1 || drink == 2)
+            Console.WriteLine("Taper 1 pour espèce ou 2 pour carte bleu. ");
+            typePayment = Console.ReadLine();
+
+            if (typePayment.Equals("1"))
             {
-                Console.WriteLine("Merci de saisir la quantité de sucre souhaitée (entre 0 et 5)");
-                string userChoice = Console.ReadLine();
-                switch (userChoice)
-                {
-                    case "0":
-                        Console.WriteLine("Votre boisson ne sera pas sucrée !");
-                        stick = false;
-                        break;
-                    default:
-                        Console.WriteLine("Nous avons enregistreé votre demande, merci");
-                        stick = true;
-                        break;
-                }
-            }
-            else if (drink == 3)
-            {
-                Console.WriteLine("Merci de saisir la quantité de sel souhaitée (entre 0 et 5)");
-                string userChoice = Console.ReadLine();
-                switch (userChoice)
-                {
-                    case "0":
-                        Console.WriteLine("Votre boisson ne sera pas salée !");
-                        stick = false;
-                        break;
-                    default:
-                        Console.WriteLine("Nous avons enregistreé votre demande, merci");
-                        stick = true;
-                        break;
-                }
+                string payment;
+                Console.WriteLine("S'il vous plaît insérer de l'argent");
+                payment = Console.ReadLine();
+
+                Cash cash = new Cash();
+
+                cash.value = Convert.ToDecimal(payment);
+                cash.Pay(drink.Price);
+                Console.ReadKey();
             }
             else
             {
-                SelectDrink(drink);
-            }
-            return (stick);
-        }
-
-        // Fonction qui affiche le prix de la boisson... l'utilisateur peut donc décider de payer maintenant ou d'ajouter un supplément
-        static void PriceWithoutOption(int drink)
-        {
-            if (drink == 1)
-            {
-                Console.WriteLine("Le montant de votre café est de 1,50euros.");
-                Console.WriteLine("Taper 1 pour payer ou taper 2 si vous souhaitez ajouter du lait");
-                string userChoice = Console.ReadLine();
-                switch (userChoice)
+                if (typePayment.Equals("2"))
                 {
-                    case "1":
-                        Console.WriteLine("Nous allons procéder au paiement!");
-                        //PayDrink();
-                        break;
-                    case "2":
-                        Console.WriteLine("Nous allons procéder à l'ajout du suppleément !");
-                        AddOption(drink);
-                        break;
-                    default:
-                        break;
+                    Console.WriteLine("S'il vous plaît insérer la carte");
+                    Console.ReadKey();
+
+                    Card card = new Card();
+                    card.Pay(drink.Price);
+
                 }
-            }
-            if (drink == 2)
-            {
-                Console.WriteLine("Le montant de votre thé est de 1,20euros.");
-                Console.WriteLine("Taper 1 pour payer ou taper 2 si vous souhaitez un thé fruit rouge");
-                string userChoice = Console.ReadLine();
-                switch (userChoice)
+
+                else
                 {
-                    case "1":
-                        Console.WriteLine("Nous allons procéder au paiement!");
-                        //PayDrink();
-                        break;
-                    case "2":
-                        Console.WriteLine("Nous allons procéder à l'ajout du supplément !");
-                        AddOption(drink);
-                        break;
-                    default:
-                        break;
+                    Console.WriteLine("S'il vous plaît choisissez une option valide !");
+                    Console.WriteLine("Taper 1 pour espèce ou 2 pour carte bleu. ");
+                    typePayment = Console.ReadLine();
                 }
-            }
-            if (drink == 3)
-            {
-                Console.WriteLine("Le montant de votre soupe est de 2,50euros.");
-                Console.WriteLine("Taper 1 pour payer ou taper 2 si vous souhaitez ajouter du fromage");
-                string userChoice = Console.ReadLine();
-                switch (userChoice)
-                {
-                    case "1":
-                        Console.WriteLine("Nous allons procéder au paiement!");
-                        //PayDrink();
-                        break;
-                    case "2":
-                        Console.WriteLine("Nous allons procéder à l'ajout du suppleément !");
-                        //AddOption();
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
 
-        static void AddOption(int drink)
-        {
-            if (drink == 1)
-            {
-                Console.WriteLine("Nous allons ajouter du lait augmentant le prix de 0,50c.");
-                PriceWithOption(drink);
-            }
-            if (drink == 2)
-            {
-                Console.WriteLine("Nous allons ajouter du fromage augmentant le prix de 0,50c.");
-                PriceWithOption(drink);
-            }
-            if (drink == 3)
-            {
-                Console.WriteLine("Nous allons vous mettre du thé rouge augmentant le prix de 0,50c.");
-                PriceWithOption(drink);
-            }
-        }
+                // si payment ok 
+                drink.PreparationDrink();
 
-        static void PriceWithOption (int drink)
-        {
-            if (drink == 1)
-            {
-                Console.WriteLine("Le prix de votre café s'eélève maintenant à 2euros.");
-                QuitOrPay();
-                return;
-            }
-            if (drink == 2)
-            {
-                Console.WriteLine("Le prix de votre thé s'eélève maintenant à 1,70euros.");
-                QuitOrPay();
-                return;
-            }
-            if (drink == 3)
-            {
-                Console.WriteLine("Le prix de votre thé s'eélève maintenant à 3euros.");
-                QuitOrPay();
-                return;
-            }
-        }
-
-        static void QuitOrPay()
-        {
-            Console.WriteLine("Taper 1 pour payer ou taper 2 annuler");
-            string userChoice = Console.ReadLine();
-            switch (userChoice)
-            {
-                case "1":
-                    Console.WriteLine("Nous allons procéder au paiement!");
-                    PayDrink();
-                    break;
-                case "2":
-                    Console.WriteLine("Vous ne souhaitez plus de boissons ? Dommage !");
-                    //SelectDrink();
-                    break;
-                default:
-                    break;
-            }
-        }
-        static void PayDrink()
-        {
-            Console.WriteLine("Souhaitez-vous payer en espèce (taper 1) ou en carte (taper 2)? ");
-            string userChoice = Console.ReadLine();
-            switch (userChoice)
-            {
-                case "1":
-                    Console.WriteLine("Vous avez choisi de payer en espèce!");
-                    //PayCash();
-                    break;
-                case "2":
-                    Console.WriteLine("Vous avez choisi de payer en carte!");
-                    //PayCard();
-                    break;
-                default:
-                    break;
+                Console.ReadKey();
             }
         }
     }
 }
+
+

@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 namespace Automate.Payment
 {
     public class Cash : PaymentMethod
@@ -7,17 +10,17 @@ namespace Automate.Payment
         public Cash()
         {
         }
-        public override void Pay(decimal PriceDrink)
+        public override void Pay(Decimal PriceDrink)
         {
             givenValue = givenValue + value;
-
+            
 
             if (givenValue < PriceDrink)
             {
-                decimal manque = PriceDrink - givenValue;
+                Decimal manque = PriceDrink - givenValue;
                 Console.WriteLine("Valeur insérer " + givenValue + " euros");
                 Console.WriteLine("S'il vous plaît insérer le montant manquant : " + manque);
-                
+                Console.ReadKey();
                 string payment;
                 payment = Console.ReadLine();
                 value = Convert.ToDecimal(payment);
@@ -25,26 +28,27 @@ namespace Automate.Payment
                 //value = Convert.ToDecimal(Console.ReadLine());
                 Pay(PriceDrink);
 
+
             }
 
             else if (givenValue > PriceDrink)
             {
-                decimal resultado = givenValue - PriceDrink;
+                Decimal resultado = givenValue - PriceDrink;
                 Console.WriteLine("Prenez votre monnaie " + resultado + " euros");
                 Console.WriteLine("Votre boisson sera preparée!");
                 Console.WriteLine("Merci!");
             }
 
             else
-            {
+          {
                 Console.WriteLine("Votre boisson sera preparée!");
                 Console.WriteLine("Merci!");
             }
-
+            
 
             //throw new NotImplementedException();
         }
 
-
+      
     }
 }
