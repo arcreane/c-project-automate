@@ -54,7 +54,7 @@ namespace Automate.Drinks
             Console.WriteLine("Voulez vous du {0} O/N", type);
             string withCondiment = Console.ReadLine();
 
-            if (withCondiment == "O")
+            if (string.Equals(withCondiment, "O", StringComparison.OrdinalIgnoreCase))
             {
                 string quantity;
                 int quantityCondiment;

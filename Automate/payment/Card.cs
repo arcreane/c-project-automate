@@ -16,7 +16,7 @@ namespace Automate.Payment
         {
             Console.WriteLine("Insérer votre carte SVP O / N");
             string resp = Console.ReadLine();
-            if (resp == "O")
+            if (string.Equals(resp, "O", StringComparison.OrdinalIgnoreCase))
             {
                 Console.WriteLine("Insérer le code de votre carte");
                 
