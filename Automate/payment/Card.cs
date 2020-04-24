@@ -12,10 +12,20 @@ namespace Automate.Payment
         {
         }
 
-        public override void pay()
+        public override bool Pay(decimal price)
         {
-            // TODO implement here
-            throw new NotImplementedException();
+            Console.WriteLine("Insérer votre carte SVP O / N");
+            string resp = Console.ReadLine();
+            if (resp == "O")
+            {
+                Console.WriteLine("Insérer le code de votre carte");
+                
+                Console.WriteLine("Paiement accepté");
+
+                return true;
+            }
+
+            return false;
         }
     }
 }

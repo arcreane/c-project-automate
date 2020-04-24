@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Automate.Drinks
 {
-    public class Tomato : Sweet
+    public class Tomato : Drink
     {
-        public Tomato() : base("Soupe de tomate", 2.50m)
+        public Tomato() : base("Soupe de tomate", 2.50m, 050m)
         {
 
         }
@@ -35,6 +35,17 @@ namespace Automate.Drinks
         //choix de suppliment et condiment
         public override void PersonalizeDrink()
         {
+            Console.WriteLine("Le prix de votre boisson est: {0}€", Price);
+            Console.WriteLine("Voulez vous du fromage pour {0} en plus O/N", PresonalizationPrice);
+            string withsupp = Console.ReadLine();
+            if (withsupp == "O")
+            {
+                Console.WriteLine("Ajouter Le fromage");
+                Price += PresonalizationPrice;
+                HasSupplement = true;
+            }
+
+            CondimentChoice("sel");
 
         }
     }

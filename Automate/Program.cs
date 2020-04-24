@@ -1,4 +1,5 @@
 ﻿using Automate.Drinks;
+using Automate.Payment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,68 @@ namespace Automate
 {
     class Program
     {
+        /// <summary>
+        /// Notre programme vise à reproduire un automate de distrubution de boisson chaude.
+        /// 1 : demander au client qu'elle boisson il veut
+        /// 2 : enregistrer son choix
+        /// 3 : demander la quantiteé de sel ou de sucre (variable entre 0 et 10)
+        /// 4 : proposer des options en fonction de la boisson choisi
+        /// 5 : afficher le montant total
+        /// 6 : demander au client le choix de paiement (card / cash)
+        /// 7 : procéder au paiement
+        /// 8 : lancer la préparation de la boisson
+        /// 9 : ajout de la quantité de condiment
+        /// 10 : ajout de l'option
+        /// 11 : servir la boisson
+        /// </summary> 
+        /// 
+        /*
+         // Payment
+            Console.WriteLine("Il faut payer {0}", drink.Price);
+
+            // si paeiment ok 
+            drink.PreparationDrink();
+
+            Console.ReadKey();*/
         static void Main(string[] args)
+        {
+            Drink drink = SelectDrink();
+
+            QuitOrContinue(drink);
+
+            drink.PersonalizeDrink();
+
+            if (QuitOrPay(drink))
+            {
+                // si paeiment ok  
+                drink.PreparationDrink();
+            }
+
+            Console.ReadKey();
+        }
+
+        private static void QuitOrContinue(Drink drink)
+        {
+            Console.WriteLine("Si vous voulez changer de boisson taper 1, " +
+                "si vous voulez quitter taper 2 sinon appuyer sur n'importe quelle touche pour continuer");
+            string userChoice = Console.ReadLine();
+
+            switch (userChoice)
+            {
+                case "1":
+                    drink = SelectDrink();
+                    break;
+                case "2":
+                    System.Environment.Exit(0);
+                    break;
+                default:
+                    Console.WriteLine("On continue avec votre boisson");
+                    break;
+            }
+
+        }
+
+        static Drink SelectDrink()
         {
             Drink drink = null;
             do
@@ -35,15 +97,49 @@ namespace Automate
                 }
             } while (drink == null);
 
-            drink.PersonalizeDrink();
+            return drink;
+        }
 
-            // Payment
-            Console.WriteLine("Il faut payer {0}", drink.Price);
+        static bool QuitOrPay(Drink drink)
+        {
+            Console.WriteLine("Taper 1 pour payer ou taper 2 annuler");
+            string userChoice = Console.ReadLine();
+            switch (userChoice)
+            {
+                case "1":
+                    Console.WriteLine("Nous allons procéder au paiement!");
+                    return PayDrink(drink);
+                case "2":
+                    Console.WriteLine("Vous ne souhaitez plus de boissons ? Dommage !");
+                    //SelectDrink();
+                    break;
+                default:
+                    break;
+            }
 
-            // si paeiment ok 
-            drink.PreparationDrink();
+            return false;
+        }
 
-            Console.ReadKey();
+        static bool PayDrink(Drink drink)
+        {
+            PaymentMethod paymentMethod = null;
+            Console.WriteLine("Souhaitez-vous payer en espèce (taper 1) ou en carte (taper 2)? ");
+            string userChoice = Console.ReadLine();
+            switch (userChoice)
+            {
+                case "1":
+                    Console.WriteLine("Vous avez choisi de payer en espèce!");
+                    paymentMethod = new Cash();
+                    break;
+                case "2":
+                    Console.WriteLine("Vous avez choisi de payer en carte!");
+                    paymentMethod = new Card();
+                    break;
+                default:
+                    break;
+            }
+
+            return paymentMethod.Pay(drink.Price);
         }
     }
 }

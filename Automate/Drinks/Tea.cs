@@ -43,7 +43,17 @@ namespace Automate.Drinks
         //choix de suppliment et condiment
         public override void PersonalizeDrink()
         {
-            
+            Console.WriteLine("Le prix de votre boisson est: {0}€", Price);
+            Console.WriteLine("Voulez vous du thé rouge pour {0} en plus O/N", PresonalizationPrice);
+            string withsupp = Console.ReadLine();
+            if (withsupp == "O")
+            {
+                Console.WriteLine("Thé fruit rouge choisie");
+                Price += PresonalizationPrice;
+                HasSupplement = true;
+            }
+
+            SugarChoice();
         }
 
     }

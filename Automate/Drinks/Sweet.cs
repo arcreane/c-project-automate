@@ -9,11 +9,15 @@ namespace Automate.Drinks
     public abstract class Sweet : Drink
     {
         public Sweet(string name, decimal price)
-            : base(name, price)
+            : base(name, price, 0.50m)
         {
 
         }
 
-        public int Quantity { get; set; }
+
+        protected void SugarChoice()
+        {
+            CondimentChoice("sucre");
+        }
     }
 }

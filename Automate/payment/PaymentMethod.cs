@@ -15,7 +15,6 @@ namespace Automate.Payment
 
         public int value;
 
-        public abstract void pay();
-
+        public abstract bool Pay(decimal price);
     }
 }
