@@ -14,6 +14,9 @@ namespace Automate.Payment
 
         public override void Pay(decimal PriceDrink)
         {
+            Console.WriteLine("S'il vous plaît insérer la carte, appuyez sur une touche quand c'est bon");
+            Console.ReadKey();
+
             bool myPassword = true;
 
             do
@@ -37,6 +40,9 @@ namespace Automate.Payment
             
         }
 
-       
+        public override void Refund()
+        {
+            Console.WriteLine(value + " € a été recrédité sur votre compte en banque");
+        }
     }
 }

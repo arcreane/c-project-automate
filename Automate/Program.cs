@@ -28,7 +28,7 @@ namespace Automate
         ///
 
         static Drink drink = null;
-
+        static PaymentMethod pm = null;
         static void Main(string[] args)
         {
            
@@ -47,9 +47,9 @@ namespace Automate
 
             // Si paiement ok
             drink.PreparationDrink();
-
+            ///Ca se passe mal il faut rembourser
+            pm.Refund();
             Console.WriteLine("Votre boisson est prête ! Bonne dégustation et à bientôt");
-
             Console.WriteLine("Veuillez appuyer sur une touchr pour quitter");
             Console.ReadKey();
 
@@ -107,31 +107,17 @@ namespace Automate
         {
             Console.WriteLine("Taper 1 pour espèce ou 2 pour carte bleu. ");
             typePayment = Console.ReadLine();
-
+           
             do
             {
                 if (typePayment.Equals("1"))
                 {
-                    string payment;
-                    Console.WriteLine("S'il vous plaît insérer de l'argent");
-                    payment = Console.ReadLine();
-
-                    Cash cash = new Cash();
-
-                    cash.value = Convert.ToDecimal(payment);
-                    cash.Pay(drink.Price);
-                    Console.ReadKey();
+                    pm = new Cash();
                 }
                 else if (typePayment.Equals("2"))
                 {
-                    Console.WriteLine("S'il vous plaît insérer la carte");
-                    Console.ReadKey();
-
-                    Card card = new Card();
-                    card.Pay(drink.Price);
-
+                    pm = new Card();
                 }
-
                 else
                 {
                     Console.WriteLine("S'il vous plaît choisissez une option valide !");
@@ -139,7 +125,9 @@ namespace Automate
                     typePayment = Console.ReadLine();
                 }
             } while (typePayment != "1" && typePayment != "2");
-          
+            
+            pm.Pay(drink.Price);
+            Console.ReadKey();
         }
     }
 }

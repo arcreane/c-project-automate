@@ -9,6 +9,11 @@ namespace Automate.Payment
         }
         public override void Pay(decimal PriceDrink)
         {
+            string payment;
+            Console.WriteLine("S'il vous plaît insérer de l'argent");
+            payment = Console.ReadLine();
+
+            value = Convert.ToDecimal(payment);
             givenValue = givenValue + value;
 
 
@@ -18,7 +23,7 @@ namespace Automate.Payment
                 Console.WriteLine("Valeur insérer " + givenValue + " euros");
                 Console.WriteLine("S'il vous plaît insérer le montant manquant : " + manque);
                 
-                string payment;
+               
                 payment = Console.ReadLine();
                 value = Convert.ToDecimal(payment);
 
@@ -43,6 +48,11 @@ namespace Automate.Payment
 
 
             //throw new NotImplementedException();
+        }
+
+        public override void Refund()
+        {
+            Console.WriteLine(value + " € en pièce retombent dans le receptacle");
         }
 
 

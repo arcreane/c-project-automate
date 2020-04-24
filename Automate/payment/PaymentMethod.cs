@@ -17,7 +17,7 @@ namespace Automate.Payment
         public decimal givenValue;
 
         public abstract void Pay(decimal Price);
-
+        public abstract void Refund();
 
     }
 }
