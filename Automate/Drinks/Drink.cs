@@ -19,12 +19,6 @@ namespace Automate.Drinks
             get;
             protected set;
         }
-        /// <summary>
-        /// constructeur de la classe drink
-        /// </summary>
-        /// <param name="name">Le nom du boisson</param>
-        /// <param name="price">Le prix de boisson</param>
-        /// <param name="presonalizationPrice">Le prix de supplement</param>
         public Drink(string name, decimal price, decimal presonalizationPrice)
         {
             this.Name = name;

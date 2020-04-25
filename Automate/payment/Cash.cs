@@ -12,12 +12,12 @@ namespace Automate.Payment
             int total = 0;
             do
             {
-                Console.WriteLine("Si vous voulez payer taper 1 pour pièces ou 2 pour billet 3 pour annuler?");
+                Console.WriteLine("Pour payer en pièces taper 1, taper 2 pour utiliser un billet ou 3 pour annuler?");
                 string resp = Console.ReadLine();
                 switch (resp)
                 {
                     case "1":
-                        Console.WriteLine("Veuillez insérer une ou plusieurs piéce de 5, 10, 20, 50 centimes, 1 ou 2 euro (séparé par espace)");
+                        Console.WriteLine("Veuillez insérer une ou plusieurs pièce(s) de 5, 10, 20, 50 centimes, 1 ou 2 euro(s) séparé par espace");
                         string cash = Console.ReadLine();
                         string[] pieces = cash.Split(' ');
 
@@ -75,7 +75,7 @@ namespace Automate.Payment
 
                 if (total < price * 100)
                 {
-                    Console.WriteLine("il vous manque {0} euro", (price * 100 - total) / 100);
+                    Console.WriteLine("Il vous manque {0} euro", ((price * 100 - total) / 100));
                 }
 
                 if (total == price * 100)

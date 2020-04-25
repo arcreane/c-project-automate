@@ -28,18 +28,23 @@ namespace Automate
        
         static void Main(string[] args)
         {
+            //Sélection de la boisson
             Drink drink = SelectDrink();
 
+            //Si mauvais choix de boisson, on propose à l'utilisateur de changer de boisson 
             QuitOrContinue(drink);
 
+
+            //Ajout option ou non, et quantité de condiment 
             drink.PersonalizeDrink();
 
+            //Propostion d'annuler la commande, ou de payer
             if (QuitOrPay(drink))
             {
                 Console.WriteLine("Votre boisson sera preparée!");
                 Console.WriteLine("Merci!");
 
-                // si paeiment ok  
+                //Si paiement ok  
                 drink.PreparationDrink();
             }
 
@@ -76,8 +81,8 @@ namespace Automate
             do
             {
                 Console.WriteLine("Bonjour");
-                Console.WriteLine("Choisir ton boisson");
-                Console.WriteLine("Tape 1 pour un café, tape 2 pour un thé et tape 3 pour une soupe");
+                Console.WriteLine("Veuillez choisir votre boisson !");
+                Console.WriteLine("Taper 1 pour un café, taper 2 pour un thé et taper 3 pour une soupe");
                 string userChoice = Console.ReadLine();
                 switch (userChoice)
                 {
@@ -101,7 +106,7 @@ namespace Automate
 
         static bool QuitOrPay(Drink drink)
         {
-            Console.WriteLine("Taper 1 pour payer ou taper 2 annuler");
+            Console.WriteLine("Taper 1 pour payer ou tapez 2 annuler");
             string userChoice = Console.ReadLine();
             switch (userChoice)
             {
@@ -110,7 +115,6 @@ namespace Automate
                     return PayDrink(drink);
                 case "2":
                     Console.WriteLine("Vous ne souhaitez plus de boissons ? Dommage !");
-                    //SelectDrink();
                     break;
                 default:
                     break;
